@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nash.team — Un puente entre la ciudad y el campo</title>
+  <meta name="description" content="Tutoría bidireccional entre estudiantes urbanos y niños rurales. Piloto 2026 en El Silencio de Coclé.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #f3ead6;
+      --paper-dark: #e8dcc0;
+      --ink: #1a1a1a;
+      --ink-soft: #2d2d2d;
+      --ink-muted: #5a5955;
+      --forest: #3d6b36;
+      --forest-dark: #254a24;
+      --leaf: #7ab054;
+      --moss: #b8c96d;
+      --coral: #e85c3a;
+      --ochre: #d4a53a;
+      --sky: #7ab8d4;
+      --sunset: #e8a856;
+      --rule: rgba(26,26,26,0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 17px;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 25% 25%, rgba(26,26,26,0.015) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(26,26,26,0.015) 1px, transparent 1px);
+      background-size: 4px 4px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    p { margin: 0 0 1em; }
+    a { color: var(--forest); }
+
+    .masthead {
+      border-bottom: 1px solid var(--rule);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      background: rgba(243, 234, 214, 0.92);
+    }
+
+    .masthead-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-family: 'Fraunces', serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-dot { color: var(--coral); }
+
+    .masthead-meta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 50px 32px 0;
+    }
+
+    .hero-kicker {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--coral);
+      font-weight: 600;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .hero-kicker::before,
+    .hero-kicker::after {
+      content: '';
+      flex: 0 0 32px;
+      height: 1px;
+      background: var(--coral);
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 700;
+      max-width: 14ch;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--forest);
+      font-weight: 600;
+    }
+
+    .hero-sub {
+      font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+      max-width: 60ch;
+      margin: 0 auto 48px;
+      text-align: center;
+      color: var(--ink-soft);
+    }
+
+    .hero-sub strong { color: var(--ink); font-weight: 600; }
+
+    .hero-illustration {
+      margin: 0 -32px;
+      display: block;
+      width: calc(100% + 64px);
+    }
+
+    .hero-illustration svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    section { padding: 100px 32px; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--coral);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    h2.section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 24px;
+      max-width: 18ch;
+    }
+
+    .lede {
+      font-size: 1.25rem;
+      color: var(--ink-soft);
+      max-width: 60ch;
+      line-height: 1.5;
+      margin-bottom: 48px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 60px;
+    }
+
+    .col-card {
+      padding-top: 24px;
+      border-top: 2px solid var(--ink);
+    }
+
+    .col-card .col-number {
+      font-family: 'Fraunces', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--coral);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .col-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .col-card p {
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .pillar-icon {
+      width: 88px;
+      height: 88px;
+      margin-bottom: 20px;
+    }
+
+    .pillar h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .pillar p {
+      font-size: 0.98rem;
+      color: var(--ink-soft);
+    }
+
+    .sustento {
+      background: var(--forest);
+      color: var(--paper);
+    }
+
+    .sustento .eyebrow { color: var(--ochre); }
+    .sustento h2 { color: var(--paper); }
+    .sustento .lede { color: rgba(243, 234, 214, 0.85); }
+
+    .reasons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .reason {
+      border-top: 2px solid var(--ochre);
+      padding-top: 20px;
+    }
+
+    .reason h3 {
+      color: var(--paper);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .reason p {
+      color: rgba(243, 234, 214, 0.8);
+      font-size: 0.98rem;
+    }
+
+    .refs-box {
+      margin-top: 60px;
+      padding: 24px 28px;
+      border: 1px solid rgba(243, 234, 214, 0.2);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: rgba(243, 234, 214, 0.75);
+    }
+
+    .refs-box h4 {
+      color: var(--ochre);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0 0 14px;
+    }
+
+    .refs-box ul { padding-left: 18px; margin: 0; }
+    .refs-box li { margin-bottom: 6px; }
+    .refs-box em { font-style: italic; color: var(--paper); }
+
+    .piloto-section { background: var(--paper-dark); }
+
+    .piloto-card {
+      background: var(--paper);
+      padding: 60px 48px;
+      border-radius: 2px;
+      box-shadow: 0 1px 0 rgba(26,26,26,0.04), 0 20px 40px -20px rgba(26,26,26,0.15);
+      position: relative;
+    }
+
+    .piloto-stamp {
+      position: absolute;
+      top: 32px;
+      right: 32px;
+      background: var(--coral);
+      color: var(--paper);
+      padding: 8px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transform: rotate(3deg);
+    }
+
+    .piloto-date {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .piloto-card h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      margin-bottom: 20px;
+    }
+
+    .piloto-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+      padding: 32px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .piloto-fact .num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .piloto-fact .label {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .photo-placeholder {
+      border: 2px dashed var(--rule);
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+      border-radius: 4px;
+      margin-top: 24px;
+      background: rgba(26,26,26,0.02);
+    }
+
+    .cafe-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 40px;
+    }
+
+    .cafe-illustration {
+      position: sticky;
+      top: 100px;
+    }
+
+    .cafe-illustration svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .cafe-story h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom: 20px;
+    }
+
+    .cafe-story p {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+    }
+
+    .cafe-stats-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 40px 0 0;
+      padding: 28px 0;
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .cafe-stat .num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--coral);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .cafe-stat .label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .cafe-bridge-note {
+      margin-top: 40px;
+      padding: 24px;
+      background: var(--moss);
+      color: var(--forest-dark);
+      border-left: 4px solid var(--forest);
+      font-size: 1rem;
+    }
+
+    .cta-section {
+      background: var(--ink);
+      color: var(--paper);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      color: var(--paper);
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      color: rgba(243, 234, 214, 0.8);
+      font-size: 1.15rem;
+      max-width: 50ch;
+      margin: 0 auto 36px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 32px;
+      background: var(--coral);
+      color: var(--paper);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .btn:hover {
+      background: #d14a2a;
+      transform: translateY(-1px);
+    }
+
+    footer {
+      padding: 40px 32px;
+      border-top: 1px solid var(--rule);
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      text-align: center;
+    }
+
+    footer a { color: var(--forest); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 760px) {
+      section { padding: 70px 24px; }
+      .hero { padding: 30px 24px 0; }
+      .hero-illustration { margin: 0 -24px; width: calc(100% + 48px); }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .cafe-layout { grid-template-columns: 1fr; gap: 40px; }
+      .cafe-illustration { position: static; }
+      .piloto-card { padding: 40px 24px; }
+      .piloto-stamp { top: 20px; right: 20px; font-size: 0.65rem; padding: 6px 12px; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">nash<span class="brand-dot">.</span>team</div>
+    <div class="masthead-meta">Piloto 2026 · Panamá</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-kicker">Un proyecto en marcha</div>
+  <h1 class="hero-title">
+    Un puente entre la <em>ciudad</em> y el <em>campo</em>
+  </h1>
+  <p class="hero-sub">
+    Estudiantes urbanos enseñan matemáticas, lectura y ciencias.
+    Niños rurales enseñan la tierra, el clima, los cultivos.
+    <strong>Los dos aprenden. Los dos crecen. Y la relación perdura.</strong>
+  </p>
+
+  <div class="hero-illustration">
+    <svg viewBox="0 0 1400 480" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración: puente entre ciudad y campo">
+      <rect x="0" y="0" width="1400" height="320" fill="#e8dcc0"/>
+      <circle cx="700" cy="110" r="48" fill="#e8a856"/>
+      <circle cx="700" cy="110" r="60" fill="none" stroke="#e8a856" stroke-width="2" opacity="0.4"/>
+
+      <g fill="#f3ead6">
+        <ellipse cx="180" cy="90" rx="50" ry="14"/>
+        <ellipse cx="210" cy="80" rx="40" ry="12"/>
+        <ellipse cx="1120" cy="70" rx="55" ry="16"/>
+        <ellipse cx="1150" cy="82" rx="35" ry="11"/>
+      </g>
+
+      <g fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round">
+        <path d="M 460 140 q 8 -8 16 0 q 8 -8 16 0"/>
+        <path d="M 510 160 q 6 -6 12 0 q 6 -6 12 0"/>
+        <path d="M 860 130 q 7 -7 14 0 q 7 -7 14 0"/>
+      </g>
+
+      <!-- CIUDAD -->
+      <rect x="40" y="180" width="70" height="140" fill="#7ab8d4"/>
+      <rect x="120" y="140" width="55" height="180" fill="#5a9ab8"/>
+      <rect x="185" y="200" width="45" height="120" fill="#7ab8d4"/>
+      <g fill="#f3ead6">
+        <rect x="50" y="200" width="8" height="10"/><rect x="70" y="200" width="8" height="10"/><rect x="90" y="200" width="8" height="10"/>
+        <rect x="50" y="225" width="8" height="10"/><rect x="70" y="225" width="8" height="10"/><rect x="90" y="225" width="8" height="10"/>
+        <rect x="50" y="250" width="8" height="10"/><rect x="70" y="250" width="8" height="10"/><rect x="90" y="250" width="8" height="10"/>
+        <rect x="50" y="275" width="8" height="10"/><rect x="70" y="275" width="8" height="10"/><rect x="90" y="275" width="8" height="10"/>
+        <rect x="130" y="160" width="7" height="9"/><rect x="148" y="160" width="7" height="9"/><rect x="164" y="160" width="7" height="9"/>
+        <rect x="130" y="185" width="7" height="9"/><rect x="148" y="185" width="7" height="9"/><rect x="164" y="185" width="7" height="9"/>
+        <rect x="130" y="210" width="7" height="9"/><rect x="148" y="210" width="7" height="9"/><rect x="164" y="210" width="7" height="9"/>
+        <rect x="130" y="235" width="7" height="9"/><rect x="148" y="235" width="7" height="9"/><rect x="164" y="235" width="7" height="9"/>
+        <rect x="130" y="260" width="7" height="9"/><rect x="148" y="260" width="7" height="9"/><rect x="164" y="260" width="7" height="9"/>
+        <rect x="195" y="220" width="6" height="8"/><rect x="210" y="220" width="6" height="8"/>
+        <rect x="195" y="245" width="6" height="8"/><rect x="210" y="245" width="6" height="8"/>
+        <rect x="195" y="270" width="6" height="8"/><rect x="210" y="270" width="6" height="8"/>
+      </g>
+
+      <rect x="260" y="230" width="130" height="90" fill="#d4a53a"/>
+      <polygon points="255,230 395,230 325,200" fill="#e85c3a"/>
+      <rect x="310" y="270" width="30" height="50" fill="#3d6b36"/>
+      <rect x="275" y="250" width="18" height="18" fill="#f3ead6"/>
+      <rect x="355" y="250" width="18" height="18" fill="#f3ead6"/>
+      <line x1="325" y1="200" x2="325" y2="170" stroke="#1a1a1a" stroke-width="2"/>
+      <polygon points="325,170 345,178 325,186" fill="#e85c3a"/>
+
+      <g transform="translate(175, 270)">
+        <circle cx="0" cy="0" r="8" fill="#1a1a1a"/>
+        <path d="M -10 8 L -10 35 L 10 35 L 10 8 Z" fill="#7ab8d4"/>
+        <rect x="-10" y="35" width="7" height="15" fill="#1a1a1a"/>
+        <rect x="3" y="35" width="7" height="15" fill="#1a1a1a"/>
+        <rect x="-14" y="12" width="6" height="18" fill="#e85c3a"/>
+      </g>
+      <g transform="translate(210, 272)">
+        <circle cx="0" cy="0" r="8" fill="#2d2d2d"/>
+        <path d="M -10 8 L -10 35 L 10 35 L 10 8 Z" fill="#d4a53a"/>
+        <rect x="-10" y="35" width="7" height="15" fill="#1a1a1a"/>
+        <rect x="3" y="35" width="7" height="15" fill="#1a1a1a"/>
+      </g>
+      <g transform="translate(240, 268)">
+        <circle cx="0" cy="0" r="8" fill="#1a1a1a"/>
+        <path d="M -10 8 L -10 35 L 10 35 L 10 8 Z" fill="#3d6b36"/>
+        <rect x="-10" y="35" width="7" height="15" fill="#1a1a1a"/>
+        <rect x="3" y="35" width="7" height="15" fill="#1a1a1a"/>
+        <rect x="-6" y="14" width="12" height="8" fill="#f3ead6" stroke="#1a1a1a" stroke-width="1"/>
+      </g>
+
+      <rect x="0" y="320" width="500" height="160" fill="#b8c96d"/>
+      <rect x="0" y="320" width="500" height="8" fill="#7ab054"/>
+      <rect x="420" y="280" width="6" height="45" fill="#5a3a20"/>
+      <circle cx="423" cy="275" r="20" fill="#7ab054"/>
+
+      <!-- PUENTE -->
+      <path d="M 500 340 Q 700 280 900 340 L 900 400 Q 700 340 500 400 Z" fill="#d4a53a" opacity="0.9"/>
+      <path d="M 500 340 Q 700 280 900 340" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-dasharray="8,6"/>
+
+      <g transform="translate(685, 305)">
+        <rect x="0" y="0" width="35" height="22" fill="#3d6b36"/>
+        <path d="M 35 0 L 55 0 L 60 -14 L 38 -14 Z" fill="#254a24"/>
+        <polygon points="40,-12 55,-12 57,-2 40,-2" fill="#7ab8d4"/>
+        <circle cx="10" cy="22" r="6" fill="#1a1a1a"/>
+        <circle cx="48" cy="22" r="6" fill="#1a1a1a"/>
+        <circle cx="10" cy="22" r="2.5" fill="#f3ead6"/>
+        <circle cx="48" cy="22" r="2.5" fill="#f3ead6"/>
+        <ellipse cx="12" cy="2" rx="6" ry="5" fill="#8b5a2b"/>
+        <ellipse cx="24" cy="3" rx="6" ry="5" fill="#8b5a2b"/>
+      </g>
+
+      <!-- CAMPO -->
+      <path d="M 900 320 Q 1000 200 1100 260 Q 1200 180 1300 240 Q 1360 200 1400 240 L 1400 320 Z" fill="#7ab054"/>
+      <path d="M 900 320 Q 970 240 1050 290 Q 1150 230 1230 280 Q 1330 230 1400 270 L 1400 320 Z" fill="#3d6b36"/>
+      <rect x="900" y="320" width="500" height="160" fill="#b8c96d"/>
+      <rect x="900" y="320" width="500" height="8" fill="#7ab054"/>
+
+      <g fill="#3d6b36">
+        <circle cx="940" cy="360" r="5"/><circle cx="955" cy="360" r="5"/><circle cx="970" cy="360" r="5"/>
+        <circle cx="985" cy="360" r="5"/><circle cx="1000" cy="360" r="5"/><circle cx="1015" cy="360" r="5"/>
+        <circle cx="940" cy="380" r="5"/><circle cx="955" cy="380" r="5"/><circle cx="970" cy="380" r="5"/>
+        <circle cx="985" cy="380" r="5"/><circle cx="1000" cy="380" r="5"/><circle cx="1015" cy="380" r="5"/>
+        <circle cx="940" cy="400" r="5"/><circle cx="955" cy="400" r="5"/><circle cx="970" cy="400" r="5"/>
+        <circle cx="985" cy="400" r="5"/><circle cx="1000" cy="400" r="5"/><circle cx="1015" cy="400" r="5"/>
+      </g>
+      <g fill="#e85c3a">
+        <circle cx="946" cy="358" r="2"/><circle cx="976" cy="358" r="2"/><circle cx="1006" cy="358" r="2"/>
+        <circle cx="961" cy="378" r="2"/><circle cx="991" cy="378" r="2"/>
+        <circle cx="946" cy="398" r="2"/><circle cx="1006" cy="398" r="2"/>
+      </g>
+
+      <g transform="translate(1100, 260)">
+        <rect x="0" y="20" width="90" height="65" fill="#e85c3a"/>
+        <polygon points="-6,20 96,20 45,-8" fill="#8b3a22"/>
+        <rect x="35" y="45" width="20" height="40" fill="#3d6b36"/>
+        <rect x="10" y="30" width="14" height="14" fill="#f3ead6"/>
+        <rect x="66" y="30" width="14" height="14" fill="#f3ead6"/>
+        <line x1="45" y1="-8" x2="45" y2="-28" stroke="#1a1a1a" stroke-width="2"/>
+        <polygon points="45,-28 62,-22 45,-16" fill="#d4a53a"/>
+      </g>
+
+      <g transform="translate(1250, 280)">
+        <rect x="-4" y="0" width="8" height="40" fill="#5a3a20"/>
+        <circle cx="0" cy="-8" r="28" fill="#3d6b36"/>
+        <circle cx="-14" cy="-2" r="18" fill="#7ab054"/>
+        <circle cx="14" cy="-2" r="18" fill="#7ab054"/>
+        <circle cx="-8" cy="-10" r="3" fill="#e85c3a"/>
+        <circle cx="10" cy="-6" r="3" fill="#e85c3a"/>
+        <circle cx="0" cy="-18" r="3" fill="#e85c3a"/>
+      </g>
+
+      <g transform="translate(1170, 310)">
+        <circle cx="0" cy="0" r="8" fill="#8b5a2b"/>
+        <ellipse cx="0" cy="-5" rx="12" ry="3" fill="#d4a53a"/>
+        <rect x="-5" y="-11" width="10" height="6" fill="#d4a53a"/>
+        <path d="M -10 8 L -10 30 L 10 30 L 10 8 Z" fill="#7ab8d4"/>
+        <rect x="-10" y="30" width="7" height="18" fill="#1a1a1a"/>
+        <rect x="3" y="30" width="7" height="18" fill="#1a1a1a"/>
+      </g>
+      <g transform="translate(1205, 312)">
+        <circle cx="0" cy="0" r="7" fill="#6b4220"/>
+        <path d="M -9 7 L -9 28 L 9 28 L 9 7 Z" fill="#e85c3a"/>
+        <rect x="-9" y="28" width="6" height="16" fill="#1a1a1a"/>
+        <rect x="3" y="28" width="6" height="16" fill="#1a1a1a"/>
+      </g>
+
+      <g transform="translate(1320, 370)">
+        <ellipse cx="0" cy="0" rx="10" ry="7" fill="#f3ead6"/>
+        <circle cx="-9" cy="-3" r="4" fill="#f3ead6"/>
+        <polygon points="-13,-4 -16,-3 -13,-2" fill="#e8a856"/>
+        <path d="M -10 -7 L -10 -10 M -8 -7 L -8 -10" stroke="#e85c3a" stroke-width="1"/>
+        <line x1="-2" y1="7" x2="-2" y2="12" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="2" y1="7" x2="2" y2="12" stroke="#1a1a1a" stroke-width="1"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="eyebrow">El problema</div>
+    <h2 class="section-title">Dos Panamás que no se tocan</h2>
+    <p class="lede">
+      Las escuelas rurales multigrado tienen una sola maestra para varios niveles al mismo tiempo.
+      Los niños urbanos crecen sin conocer el país donde viven.
+      Entre ambos mundos hay una distancia que ningún programa de caridad ha logrado cerrar.
+    </p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <span class="col-number">01</span>
+        <h3>El aula rural multigrado</h3>
+        <p>
+          Una maestra. Varios grados al mismo tiempo. Atención diferenciada imposible sin apoyo.
+          El niño que no entiende en primera explicación, muchas veces no la recibe otra vez.
+        </p>
+      </div>
+      <div class="col-card">
+        <span class="col-number">02</span>
+        <h3>El aula urbana aislada</h3>
+        <p>
+          Estudiantes que crecen sin conocer cómo se produce lo que comen,
+          sin una sola amistad en el Panamá rural, y con pocas formas reales de
+          hacer algo útil con lo que aprenden.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--paper-dark);">
+  <div class="section-inner">
+    <div class="eyebrow">La idea</div>
+    <h2 class="section-title">Tutoría que funciona en dos direcciones</h2>
+    <p class="lede">
+      Aprendizaje real. Saber compartido. Amistad que dura. El programa no es caridad: es reciprocidad.
+    </p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 88 88">
+          <rect x="14" y="20" width="60" height="48" fill="#3d6b36" rx="2"/>
+          <rect x="14" y="20" width="60" height="8" fill="#254a24" rx="2"/>
+          <line x1="22" y1="38" x2="66" y2="38" stroke="#f3ead6" stroke-width="2"/>
+          <line x1="22" y1="46" x2="58" y2="46" stroke="#f3ead6" stroke-width="2"/>
+          <line x1="22" y1="54" x2="62" y2="54" stroke="#f3ead6" stroke-width="2"/>
+          <circle cx="68" cy="58" r="5" fill="#e85c3a"/>
+        </svg>
+        <h3>Tutoría académica</h3>
+        <p>Un estudiante urbano de 15 a 17 años acompaña a un niño rural en matemáticas, lectura, ciencias.</p>
+      </div>
+
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 88 88">
+          <path d="M 44 70 Q 44 45 44 30" stroke="#5a3a20" stroke-width="3" fill="none"/>
+          <ellipse cx="30" cy="35" rx="14" ry="10" fill="#3d6b36"/>
+          <ellipse cx="58" cy="32" rx="16" ry="12" fill="#7ab054"/>
+          <ellipse cx="44" cy="22" rx="14" ry="10" fill="#3d6b36"/>
+          <circle cx="26" cy="38" r="2" fill="#e85c3a"/>
+          <circle cx="52" cy="28" r="2" fill="#e85c3a"/>
+          <circle cx="62" cy="36" r="2" fill="#e85c3a"/>
+          <circle cx="42" cy="18" r="2" fill="#e85c3a"/>
+          <path d="M 30 70 L 58 70" stroke="#1a1a1a" stroke-width="1.5"/>
+          <path d="M 35 70 Q 44 62 53 70" fill="#b8c96d"/>
+        </svg>
+        <h3>Tutoría inversa</h3>
+        <p>El niño rural enseña lo que sabe: cultivos, clima, manejo de tierra. No es un receptor, es también maestro.</p>
+      </div>
+
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 88 88">
+          <circle cx="28" cy="38" r="10" fill="#7ab8d4"/>
+          <circle cx="60" cy="38" r="10" fill="#d4a53a"/>
+          <path d="M 38 38 Q 44 30 50 38" stroke="#e85c3a" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M 18 55 L 18 72 L 38 72 L 38 55 Z" fill="#7ab8d4"/>
+          <path d="M 50 55 L 50 72 L 70 72 L 70 55 Z" fill="#d4a53a"/>
+        </svg>
+        <h3>Amistad que dura</h3>
+        <p>La relación continúa más allá del piloto. Encuentros, visitas, contacto real entre dos mundos.</p>
+      </div>
+
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 88 88">
+          <rect x="14" y="44" width="18" height="28" fill="#7ab8d4"/>
+          <rect x="56" y="44" width="18" height="28" fill="#7ab054"/>
+          <path d="M 32 58 L 56 58" stroke="#e85c3a" stroke-width="3" stroke-dasharray="3,3"/>
+          <circle cx="44" cy="58" r="6" fill="#d4a53a" stroke="#1a1a1a" stroke-width="1.5"/>
+          <text x="44" y="62" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="10" fill="#1a1a1a">$</text>
+          <rect x="20" y="50" width="6" height="6" fill="#f3ead6"/>
+          <rect x="62" y="50" width="6" height="6" fill="#f3ead6"/>
+        </svg>
+        <h3>Futuro compartido</h3>
+        <p>Algunos tutores elegirán carreras conectadas al campo. Algunos niños rurales tendrán capital urbano que crea en ellos. Es posible porque ya se conocen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sustento">
+  <div class="section-inner">
+    <div class="eyebrow">Por qué esto funciona</div>
+    <h2 class="section-title">No es una idea nueva.<br/>Es una que merece escala.</h2>
+    <p class="lede">
+      El aprendizaje entre pares, el saber dialógico, y el capital social entre grupos distintos
+      son campos con décadas de investigación. Acá, en síntesis, los cuatro pilares que nos sostienen.
+    </p>
+
+    <div class="reasons">
+      <div class="reason">
+        <h3>Se aprende enseñando</h3>
+        <p>Explicar un concepto obliga a consolidarlo. El tutor aprende más profundo que si solo estudiara. Es uno de los hallazgos más robustos de la psicología cognitiva aplicada a educación.</p>
+      </div>
+      <div class="reason">
+        <h3>El saber rural también educa</h3>
+        <p>Una pedagogía que reconoce al otro como sujeto, no como recipiente vacío, cambia la dinámica. El niño rural que enseña gana algo que ningún aula tradicional le da: autoridad.</p>
+      </div>
+      <div class="reason">
+        <h3>Las amistades entre mundos abren futuros</h3>
+        <p>Investigación reciente muestra que las relaciones entre grupos sociales distintos predicen movilidad económica más que cualquier otra variable social. Una amistad cruzada es infraestructura.</p>
+      </div>
+      <div class="reason">
+        <h3>Multigrado necesita pares</h3>
+        <p>Cuando una maestra atiende varios grados a la vez, el aprendizaje colaborativo y la tutoría entre pares no son un lujo metodológico: son una necesidad operativa.</p>
+      </div>
+    </div>
+
+    <div class="refs-box">
+      <h4>Referencias</h4>
+      <ul>
+        <li>Fiorella, L. &amp; Mayer, R. — <em>Learning by teaching</em>. Contemporary Educational Psychology.</li>
+        <li>Topping, K. — <em>Trends in peer learning</em>. Educational Psychology.</li>
+        <li>Chetty, R. et al. — <em>Social capital and economic mobility</em>. Nature.</li>
+        <li>Freire, P. — <em>Pedagogía del Oprimido</em>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="piloto-section" id="piloto">
+  <div class="section-inner">
+    <div class="piloto-card">
+      <div class="piloto-stamp">Piloto en marcha</div>
+      <div class="piloto-date">JUNIO 2026 · EL SILENCIO DE COCLÉ</div>
+      <h2>Una escuela. Una maestra. Una tutora. Veinticinco niños.</h2>
+      <p style="font-size: 1.1rem; color: var(--ink-soft); max-width: 60ch;">
+        Una escuela multigrado de 25 niños y una sola maestra. Una tutora urbana de 17 años,
+        bilingüe, con ganas de empezar. Un compromiso: aprender juntos, enseñar en los dos sentidos,
+        y documentar lo que funciona y lo que no.
+      </p>
+
+      <div class="piloto-facts">
+        <div class="piloto-fact">
+          <span class="num">25</span>
+          <span class="label">Alumnos</span>
+        </div>
+        <div class="piloto-fact">
+          <span class="num">9</span>
+          <span class="label">Grados en una sola aula</span>
+        </div>
+        <div class="piloto-fact">
+          <span class="num">1</span>
+          <span class="label">Maestra</span>
+        </div>
+        <div class="piloto-fact">
+          <span class="num">1</span>
+          <span class="label">Tutora bilingüe</span>
+        </div>
+      </div>
+
+      <p style="color: var(--ink-muted);">
+        Compartiremos lo que aprendamos. Las bitácoras, las fotos, los resultados — lo bueno y lo que haya que ajustar.
+      </p>
+
+      <div class="photo-placeholder">
+        📸 Espacio para fotos del piloto (escuela, tutora, comunidad)<br/>
+        <small style="opacity: 0.7;">Reemplazar con &lt;img src="..."&gt; cuando haya consentimientos firmados</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="cafe-layout">
+      <div class="cafe-illustration">
+        <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración: Café del Canal">
+          <circle cx="250" cy="250" r="230" fill="#f3ead6" stroke="#1a1a1a" stroke-width="2"/>
+          <circle cx="250" cy="250" r="210" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,6"/>
+
+          <path d="M 60 320 Q 130 220 200 280 Q 270 210 340 270 Q 400 230 440 270 L 440 400 L 60 400 Z" fill="#7ab054"/>
+          <path d="M 60 320 Q 120 250 190 290 Q 260 240 330 290 Q 390 260 440 290 L 440 400 L 60 400 Z" fill="#3d6b36"/>
+
+          <g transform="translate(220, 270)">
+            <rect x="0" y="20" width="60" height="40" fill="#e85c3a"/>
+            <polygon points="-4,20 64,20 30,0" fill="#8b3a22"/>
+            <rect x="26" y="38" width="12" height="22" fill="#3d6b36"/>
+          </g>
+
+          <g fill="#254a24">
+            <circle cx="130" cy="340" r="8"/><circle cx="150" cy="340" r="8"/><circle cx="170" cy="340" r="8"/>
+            <circle cx="130" cy="360" r="8"/><circle cx="150" cy="360" r="8"/><circle cx="170" cy="360" r="8"/>
+            <circle cx="330" cy="340" r="8"/><circle cx="350" cy="340" r="8"/><circle cx="370" cy="340" r="8"/>
+            <circle cx="330" cy="360" r="8"/><circle cx="350" cy="360" r="8"/><circle cx="370" cy="360" r="8"/>
+          </g>
+
+          <g fill="#e85c3a">
+            <circle cx="136" cy="338" r="2.5"/><circle cx="156" cy="338" r="2.5"/>
+            <circle cx="336" cy="338" r="2.5"/><circle cx="356" cy="358" r="2.5"/>
+            <circle cx="166" cy="358" r="2.5"/>
+          </g>
+
+          <g transform="translate(200, 170)">
+            <rect x="0" y="0" width="60" height="32" fill="#3d6b36"/>
+            <path d="M 60 0 L 90 0 L 95 -20 L 65 -20 Z" fill="#254a24"/>
+            <polygon points="68,-18 90,-18 92,-4 68,-4" fill="#7ab8d4"/>
+            <circle cx="15" cy="32" r="8" fill="#1a1a1a"/>
+            <circle cx="78" cy="32" r="8" fill="#1a1a1a"/>
+            <circle cx="15" cy="32" r="3" fill="#f3ead6"/>
+            <circle cx="78" cy="32" r="3" fill="#f3ead6"/>
+            <ellipse cx="15" cy="4" rx="8" ry="6" fill="#8b5a2b"/>
+            <ellipse cx="33" cy="4" rx="8" ry="6" fill="#8b5a2b"/>
+            <ellipse cx="48" cy="4" rx="8" ry="6" fill="#8b5a2b"/>
+          </g>
+
+          <circle cx="380" cy="110" r="30" fill="#e8a856"/>
+
+          <text x="250" y="460" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="22" fill="#1a1a1a">Café del Canal</text>
+          <text x="250" y="478" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" letter-spacing="2" fill="#5a5955">DESDE 2020 · RÍO INDIO, COCLÉ</text>
+        </svg>
+      </div>
+
+      <div class="cafe-story">
+        <div class="eyebrow">Por qué creemos en esto</div>
+        <h2>Porque lo venimos viviendo</h2>
+        <p>
+          Desde 2020 operamos <strong>Café del Canal</strong>, un modelo de creación de mercado
+          que conecta productores rurales de Río Indio con compradores institucionales en la ciudad.
+        </p>
+        <p>
+          Empezó con USD 500 y un pickup. Compramos café en cereza a los productores, lo secamos, lo pilamos
+          y lo vendemos a compradores institucionales. El productor gana mercado estable.
+          El comprador gana trazabilidad. El campo gana capital que circula.
+        </p>
+
+        <div class="cafe-stats-row">
+          <div class="cafe-stat">
+            <span class="num">2020</span>
+            <span class="label">Año cero</span>
+          </div>
+          <div class="cafe-stat">
+            <span class="num">$500</span>
+            <span class="label">Capital inicial</span>
+          </div>
+          <div class="cafe-stat">
+            <span class="num">$18K</span>
+            <span class="label">Volumen 2025</span>
+          </div>
+          <div class="cafe-stat">
+            <span class="num">×36</span>
+            <span class="label">De crecimiento</span>
+          </div>
+        </div>
+
+        <div class="cafe-bridge-note">
+          <strong>Café del Canal</strong> es la base operativa de lo que Nash.team puede llegar a ser:
+          una red donde los estudiantes urbanos de hoy, a través de la amistad y el aprendizaje,
+          se conviertan en los socios comerciales, inversores o aliados del campo panameño del mañana.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="section-inner">
+    <div class="eyebrow" style="color: var(--ochre);">Acompañanos</div>
+    <h2>Estamos sembrando.<br/>¿Querés formar parte?</h2>
+    <p>
+      Si sos estudiante, representás una escuela, o querés apoyar el trabajo desde donde estés,
+      escribinos. Nos encanta conocer a quienes creen en lo mismo.
+    </p>
+    <a class="btn" href="mailto:hello@nash.team">Escribir a hello@nash.team</a>
+  </div>
+</section>
+
+<footer>
+  <p>
+    nash.team — Un proyecto en marcha desde Panamá ·
+    <a href="mailto:hello@nash.team">hello@nash.team</a>
+  </p>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('section, .pillar, .reason, .col-card, .cafe-stat, .piloto-fact');
+  revealEls.forEach(el => el.classList.add('reveal'));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
